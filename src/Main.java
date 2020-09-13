@@ -8,8 +8,6 @@ import java.util.Scanner;
  */
 public class Main {
     public static void main(String[] args) throws IOException {
-        String line;
-        int number;
 
         ReadAndWrite readAndWrite = new ReadAndWrite();
         ArrayList<Person> personArray;
