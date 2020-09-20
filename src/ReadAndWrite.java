@@ -1,3 +1,6 @@
+import Models.Employee;
+import Models.Person;
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -13,12 +16,12 @@ public class ReadAndWrite {
      */
     public void readCounterWithFile(){
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(PATH_COUNTERS_WORKERS))) {
-                Person.counter = ois.readInt();
+                Employee.counter = ois.readInt();
                 ois.close();
-                if(Person.counter == 0){
+                if(Employee.counter == 0){
                     System.out.println("Файл пустой");
                 } else{
-                    System.out.println("Количество сотрудников: " + Person.counter +
+                    System.out.println("Количество сотрудников: " + Employee.counter +
                             "\nЕсли вы хотите узнать информацию о загруженных сотрудниках, " +
                             "то выберите соответствующий пункт в меню");
                 }
@@ -32,7 +35,7 @@ public class ReadAndWrite {
      */
     public void writeCounterInFile(){
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(PATH_COUNTERS_WORKERS))) {
-            oos.writeInt(Person.counter);
+            oos.writeInt(Employee.counter);
             oos.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -42,10 +45,10 @@ public class ReadAndWrite {
     /**
      * Read objects with File
      */
-    public ArrayList<Person> readPersonWithFile(ArrayList<Person> personArrayList) {
+    public ArrayList<Employee> readPersonWithFile(ArrayList<Employee> personArrayList) {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(PATH_WORKERS))) {
-                ArrayList<Person> personArrayListInFile = ((ArrayList<Person>) ois.readObject());
-                for (int i = 0; i < Person.counter; i++){
+                ArrayList<Employee> personArrayListInFile = ((ArrayList<Employee>) ois.readObject());
+                for (int i = 0; i < Employee.counter; i++){
                     personArrayList.add(personArrayListInFile.get(i));
                 }
 
@@ -60,7 +63,7 @@ public class ReadAndWrite {
      * Write objects in File
      * @param personArrayList
      */
-    public void writePersonInFile(ArrayList<Person> personArrayList) {
+    public void writePersonInFile(ArrayList<Employee> personArrayList) {
             try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(PATH_WORKERS))) {
                 oos.writeObject(personArrayList);
                 oos.close();

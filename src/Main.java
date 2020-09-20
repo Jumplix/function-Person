@@ -1,4 +1,7 @@
 
+import Models.Employee;
+import Models.Person;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -10,7 +13,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         ReadAndWrite readAndWrite = new ReadAndWrite();
-        ArrayList<Person> personArray;
+        ArrayList<Employee> personArray;
         UtilsFunctions utilsFunctions;
 
         Scanner scanner = new Scanner(System.in);
@@ -22,8 +25,13 @@ public class Main {
             System.out.println();
 
             //Загрузить сотрудников
-            readAndWrite.readPersonWithFile(personArray = new ArrayList<>());
+            if(Employee.counter != 0) {
+                readAndWrite.readPersonWithFile(personArray = new ArrayList<>());
+            } else{
+                personArray = new ArrayList<>();
+            }
             utilsFunctions = new UtilsFunctions(scanner,personArray);
+
 
             //Вызов основного меню
             System.out.println("Menu");
@@ -36,7 +44,7 @@ public class Main {
                             "6 - Удалить всех сотрудников");
 
             switch (scanner.nextInt()) {
-                case 1: // Person info
+                case 1: // Models.Person info
                     utilsFunctions.personInfo();
 
                     break;
@@ -56,7 +64,7 @@ public class Main {
                     break;
                 case 6:// Remove All
                     personArray.removeAll(personArray);
-                    Person.counter = 0;
+                    Employee.counter = 0;
 
                     break;
                 default:
